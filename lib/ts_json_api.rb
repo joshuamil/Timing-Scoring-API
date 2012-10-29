@@ -1,0 +1,2 @@
+module TsJsonApi
+end
