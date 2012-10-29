@@ -2,6 +2,7 @@ require 'ts_json_api/requestor/private_methods'
 require 'ts_json_api/requestor/drivers'
 require 'ts_json_api/requestor/logging'
 require 'ts_json_api/requestor/races'
+require 'ts_json_api/requestor/tracks'
 require 'ts_json_api/requestor/utility_methods'
 
 module TsJsonApi
@@ -13,6 +14,7 @@ module TsJsonApi
 
 		include Drivers
 		include Races
+		include Tracks
 
 	end
 end
