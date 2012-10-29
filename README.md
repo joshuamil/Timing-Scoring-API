@@ -4,6 +4,12 @@ Use this gem to consume the T&S JSON API provided for live & summary race data.
 
 ## Installation
 
+Add the gem to your Gemfile
+
+```ruby
+gem 'ts_json_api'
+```
+
 Run the following rails generator to setup the gem
 
 	> rails g ts_json_api:install
