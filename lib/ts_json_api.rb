@@ -1,6 +1,31 @@
 require 'rest-client'
 
 module TsJsonApi
+
 	autoload :Configure,			'ts_json_api/configure'
 	autoload :Requestor,			'ts_json_api/requestor'
+
+	# Expose all the methods of the Requestor class directly on the module itself
+	#
+	# Example call:
+	# 	TsJsonApi.weekend 
+	# 	is same as
+	# 	TsJsonApi::Requestor.weekend
+	#
+	class << self
+
+		def method_missing(method, *args, &block)
+			if Requestor.respond_to?(method)
+				Requestor.send method, *args
+			else
+				super
+			end
+		end
+
+		def respond_to?(method)
+			Requestor.respond_to? method
+		end 
+
+	end
+
 end

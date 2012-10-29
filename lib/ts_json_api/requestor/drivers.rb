@@ -6,8 +6,8 @@ module TsJsonApi
 
 			module ClassMethods
 
-				def get_drivers(year, series_id)
-					send_json_request_and_deliver_response :drivers, "driver?race_season=#{year}&series_id=#{series_id}"
+				def get_drivers(race_season, series_id)
+					send_json_request_and_deliver_response "drivers_#{race_season}_series_#{series_id}", "driver?race_season=#{race_season}&series_id=#{series_id}"
 				end
 
 				def driver_summary(race_season, series_id, driver_id=nil)
