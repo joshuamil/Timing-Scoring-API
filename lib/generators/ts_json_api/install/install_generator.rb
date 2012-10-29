@@ -5,7 +5,10 @@ module TsJsonApi
 		def create_initializer
 			initializer "ts_json_api.rb", <<-CONFIG
 TsJsonApi::Configure.setup do |config|
-	config.access_token = ""
+	config.username = ""
+	config.password = ""
+	config.logging_enabled = true
+	config.server_url = ""
 end
 			CONFIG
 		end
