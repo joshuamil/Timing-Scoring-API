@@ -13,7 +13,7 @@ module TsJsonApi
 				    
 						url = "#{Configure.server_url}#{partial_url}"
 
-				    response = api[partial_url].get accept: :json
+				    response = api[partial_url].get
 					  json = response.to_str
 					  json.gsub!(/[^\x20-\x7e]/,'')
 
@@ -44,7 +44,7 @@ module TsJsonApi
 			  end
 
 			  def api
-					@@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20)
+					@@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20, headers: { accept: "application/json;version=#{Configure.api_version}"})
 			  end
 
 			end

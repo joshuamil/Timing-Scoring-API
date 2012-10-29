@@ -7,6 +7,7 @@ module TsJsonApi
 TsJsonApi::Configure.setup do |config|
 	config.username = ""
 	config.password = ""
+	config.api_version = 2
 	config.logging_enabled = true
 	config.server_url = ""
 end

@@ -29,6 +29,14 @@ module TsJsonApi
         @@server_url
       end
 
+      def api_version=(v)
+        @@api_version = v
+      end
+
+      def api_version
+        @@api_version ||= 2
+      end
+
       def logging_enabled=(b)
         @@logging_enabled = b
       end
