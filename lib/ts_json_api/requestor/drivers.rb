@@ -10,6 +10,12 @@ module TsJsonApi
 					send_json_request_and_deliver_response :drivers, "driver?race_season=#{year}&series_id=#{series_id}"
 				end
 
+				def driver_summary(race_season, series_id, driver_id=nil)
+					url = "driversummary?race_season=#{race_season}&series_id=#{series_id}"
+					url << "&driver_id=#{driver_id}" unless driver_id.blank?
+					send_json_request_and_deliver_response "driver_summary_#{race_season}_#{series_id}_#{driver_id}", url
+				end
+
 			end
 
 		end
