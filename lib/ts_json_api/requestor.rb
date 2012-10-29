@@ -8,6 +8,7 @@ require 'ts_json_api/requestor/schedule'
 require 'ts_json_api/requestor/series'
 require 'ts_json_api/requestor/tracks'
 require 'ts_json_api/requestor/utility_methods'
+require 'ts_json_api/requestor/weekend'
 
 module TsJsonApi
 	class Requestor
@@ -23,6 +24,7 @@ module TsJsonApi
 		include Schedule
 		include Series
 		include Tracks
+		include Weekend
 
 	end
 end
