@@ -16,6 +16,24 @@ Run the following rails generator to setup the gem
 
 This generator creates an initializer that you will need to configure for your access token to use the API.
 
+## Configuration
+
+This gem provides several configuration options exposed in an `ts_json_api.rb` initializer that is created for you when you run the included generator.
+
+```ruby
+TsJsonApi::Configure.setup do |config|
+	config.username = ""
+	config.password = ""
+	config.api_version = 2
+	config.logging_enabled = true
+	config.server_url = ""
+end
+```
+
+The `username`, `password`, and `server_url` fields are all requried to specify which service to connect to.  The `api_version` field allows you to specify a particular version or contract you have in place with the T&S team when authenticating with the service.
+
+You can disable logging by setting `logging_enabled = false`. Logging will log the raw response from the T&S service into the Rails `tmp/ts_json_api/` directory for you to review.
+
 ## Usage
 
 This gem exposes several methods that map directly to API calls from the T&S team.  
