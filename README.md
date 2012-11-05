@@ -62,7 +62,7 @@ TsJsonApi.live_flag
 TsJsonApi.live_points
 
 # Points
-TsJsonApi.driver_points(race_season, series_id, race_id=nil)
+TsJsonApi.points_per_race(race_season, series_id, race_id=nil)
 
 # Races
 TsJsonApi.get_race(race_id)

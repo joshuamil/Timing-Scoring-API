@@ -5,7 +5,7 @@ module TsJsonApi
 			extend ActiveSupport::Concern
 			module ClassMethods
 
-				def driver_points(race_season, series_id, race_id=nil)
+				def points_per_race(race_season, series_id, race_id=nil)
 
 					url = "driverpoints?race_season=#{race_season}&series_id=#{series_id}"
 					file_type = "driver_points_#{race_season}_series_#{series_id}"
