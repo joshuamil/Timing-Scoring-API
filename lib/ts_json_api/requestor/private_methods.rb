@@ -6,45 +6,39 @@ module TsJsonApi
 
 			module ClassMethods
 
-				def send_json_request_and_deliver_response(file_type, partial_url, &block)
-					failure = false
-					reason = nil
-					begin
-				    
-						url = "#{Configure.server_url}#{partial_url}"
+				def send_json_request_and_deliver_response(file_type, partial_url)
+					url = "#{Configure.server_url}#{partial_url}"
 
-				    response = api[partial_url].get
-					  json = response.to_str
-					  json.gsub!(/[^\x20-\x7e]/,'')
+				  response = perfom_request(partial_url)
+					json = response.to_str
+					json.gsub!(/[^\x20-\x7e]/,'')
 
-					  self.log file_type, url, json
+					log(file_type, url, json)
 
-					  json = JSON.parse(json)
-
-					  if json.is_a?(Hash) && json.keys.include?('ResponseCode') && json['ResponseCode'].to_i != 200
-							failure = true
-							reason = "JSON feed failure with a response code: #{json['ResponseCode']}"
-					  end
-					rescue RestClient::ResourceNotFound => e
-					  failure = true
-					  reason = "NASCAR JSON Unavailable"
-					rescue ActiveRecord::RecordInvalid => e
-					  failure = true
-					  reason = "NASCAR JSON Data prevented a database save as it did not meet validation requirements"
-					end
-					return block.call(failure, json, reason) if block_given?
-					json
-			  end
-			  
-			  def default_processor_block
-					@block ||= lambda do |failure, json, reason| 
-					  Rails.logger.error "block status: #{failure} -- reason: '#{reason}'"
-					  failure ? nil : json
-					end
+					JSON.parse(json)
 			  end
 
 			  def api
 					@@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20, headers: { accept: "application/json;version=#{Configure.api_version}"})
+			  end
+
+			  def perfom_request(partial_url)
+			  	begin
+			  		api[partial_url].get
+
+			  	rescue RestClient::Exceptions::EXCEPTIONS_MAP[400] => e
+						raise ApiLimitExceededException.new exception: e
+
+					rescue RestClient::Exceptions::EXCEPTIONS_MAP[404] => e
+						raise ResourceNotFound.new exception: e
+
+			  	rescue RestClient::ServerBrokeConnection => e
+			  		raise ServerBrokeConnection.new exception: e
+
+			  	rescue RestClient::Exception => e
+			  		raise Exception.new exception: e
+
+			  	end
 			  end
 
 			end

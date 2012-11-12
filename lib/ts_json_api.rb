@@ -1,4 +1,5 @@
 require 'rest-client'
+require 'ts_json_api/exceptions'
 
 module TsJsonApi
 

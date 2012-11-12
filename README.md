@@ -81,3 +81,24 @@ TsJsonApi.get_track(track_id, series_id=nil)
 # Weekend
 TsJsonApi.weekend(race_id)
 ```
+
+### Exceptions
+
+The gem also provides the following exceptions you should watch out for:
+
+```ruby
+begin
+	TsJsonApi.live_data
+
+rescue TsJsonApi::ApiLimitExceededException
+	puts "rate limit exceeded"
+
+rescue TsJsonApi::ResourceNotFound
+	puts "requested URL not found, shouldn't ever happen"
+
+rescue TsJsonApi::ServerBrokeConnection
+	puts "connection to server was broken"
+
+rescue TsJsonApi::Exception => e
+	puts "some exception bubbled up from RestClient: #{e}, or a catch-all for all TsJsonApi exceptions"
+```
