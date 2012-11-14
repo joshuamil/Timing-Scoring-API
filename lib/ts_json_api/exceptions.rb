@@ -33,6 +33,16 @@ module TsJsonApi
 
 	end
 
+	# This exception is thrown when we aren't authorized to access the server
+	class AccessTokenRefused < Exception
+		def initialize(*args)
+			options = args.extract_options!
+			options.merge! http_code: 401
+			super options
+			self.message = 'Access token refused'
+		end
+	end
+
 	# Server connection was severed
 	class ServerBrokeConnection < Exception
 

@@ -27,13 +27,16 @@ module TsJsonApi
 			  		api[partial_url].get
 
 			  	rescue RestClient::Exceptions::EXCEPTIONS_MAP[400] => e
-						raise ApiLimitExceededException.new exception: e
+					raise ApiLimitExceededException.new exception: e
 
-					rescue RestClient::Exceptions::EXCEPTIONS_MAP[404] => e
-						raise ResourceNotFound.new exception: e
+				rescue RestClient::Exceptions::EXCEPTIONS_MAP[404] => e
+					raise ResourceNotFound.new exception: e
 
 			  	rescue RestClient::ServerBrokeConnection => e
 			  		raise ServerBrokeConnection.new exception: e
+
+			  	rescue RestClient::Exceptions::EXCEPTIONS_MAP[401] => e
+			  		raise AccessTokenRefused.new exception: e
 
 			  	rescue RestClient::Exception => e
 			  		raise Exception.new exception: e

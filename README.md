@@ -108,6 +108,9 @@ rescue TsJsonApi::ResourceNotFound
 rescue TsJsonApi::ServerBrokeConnection
 	puts "connection to server was broken"
 
+rescue TsJsonApi::AccessTokenRefused
+	puts "access token was refused for this server: #{TsJsonApi::Configure.server_url}"
+
 rescue TsJsonApi::Exception => e
 	puts "some exception bubbled up from RestClient: #{e}, or a catch-all for all TsJsonApi exceptions"
 ```
