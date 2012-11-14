@@ -27,12 +27,21 @@ TsJsonApi::Configure.setup do |config|
 	config.api_version = 2
 	config.logging_enabled = true
 	config.server_url = ""
+	config.timestamped_logs = false
 end
 ```
 
 The `username`, `password`, and `server_url` fields are all requried to specify which service to connect to.  The `api_version` field allows you to specify a particular version or contract you have in place with the T&S team when authenticating with the service.
 
 You can disable logging by setting `logging_enabled = false`. Logging will log the raw response from the T&S service into the Rails `tmp/ts_json_api/` directory for you to review.
+
+If you wish to keep a log file for every transaction with the API, you will want to enabled `timestamped_logs`.  This feature will keep a unique file instead of overwriting the previous response from the API every time.
+
+If you use this feature, we highly encourage you to run the included rake task:
+
+```shell
+> bundle exec rake ts_json_api:remove_old_log_files
+```
 
 ## Usage
 

@@ -10,6 +10,7 @@ TsJsonApi::Configure.setup do |config|
 	config.api_version = 2
 	config.logging_enabled = true
 	config.server_url = ""
+	config.timestamped_logs = false
 end
 			CONFIG
 		end

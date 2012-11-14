@@ -6,14 +6,14 @@ module TsJsonApi
 
 			module ClassMethods
 
-				def send_json_request_and_deliver_response(file_type, partial_url)
+				def send_json_request_and_deliver_response(path, partial_url)
 					url = "#{Configure.server_url}#{partial_url}"
 
 				  response = perfom_request(partial_url)
 					json = response.to_str
 					json.gsub!(/[^\x20-\x7e]/,'')
 
-					log(file_type, url, json)
+					log(path, url, json)
 
 					JSON.parse(json)
 			  end

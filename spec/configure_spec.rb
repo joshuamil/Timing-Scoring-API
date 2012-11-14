@@ -48,6 +48,15 @@ describe TsJsonApi::Configure do
 			TsJsonApi::Configure.logging_enabled?.should == false
 		end
 
+		it "should have timestamp logging disabled by default" do
+			TsJsonApi::Configure.timestamped_logs?.should be_false
+		end
+
+		it "should store timestamped logging setting" do
+			TsJsonApi::Configure.timestamped_logs = true
+			TsJsonApi::Configure.timestamped_logs?.should be_true
+		end
+
 	end
 
 end

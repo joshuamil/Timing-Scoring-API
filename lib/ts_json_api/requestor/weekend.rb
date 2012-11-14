@@ -6,7 +6,7 @@ module TsJsonApi
 			module ClassMethods
 
 				def weekend(race_id)
-					send_json_request_and_deliver_response "weekend_#{race_id}", "weekend/#{race_id}"
+					send_json_request_and_deliver_response "races/#{race_id}-weekend", "weekend/#{race_id}"
 				end
 
 			end

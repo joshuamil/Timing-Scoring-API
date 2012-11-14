@@ -5,7 +5,7 @@ module TsJsonApi
 			extend ActiveSupport::Concern
 			module ClassMethods
 				def series
-					send_json_request_and_deliver_response :series, "series"
+					send_json_request_and_deliver_response "series", "series"
 				end
 			end
 
