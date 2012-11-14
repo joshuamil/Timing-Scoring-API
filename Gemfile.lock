@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ts_json_api (0.2.0)
+    ts_json_api (0.2.1)
       rails (~> 3.2.8)
       rest-client
 
