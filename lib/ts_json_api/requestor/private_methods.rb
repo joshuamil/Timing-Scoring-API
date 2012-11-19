@@ -32,7 +32,7 @@ module TsJsonApi
 				rescue RestClient::Exceptions::EXCEPTIONS_MAP[404] => e
 					raise ResourceNotFound.new exception: e
 
-			  	rescue RestClient::ServerBrokeConnection => e
+			  	rescue RestClient::ServerBrokeConnection, Errno::ECONNRESET => e
 			  		raise ServerBrokeConnection.new exception: e
 
 			  	rescue RestClient::Exceptions::EXCEPTIONS_MAP[401] => e
