@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'ts_json_api/exceptions'
+require 'ts_json_api/railtie'
 
 module TsJsonApi
 
@@ -26,6 +27,10 @@ module TsJsonApi
 		def respond_to?(method)
 			Requestor.respond_to? method
 		end 
+
+		def root
+			File.expand_path '../..', __FILE__
+		end
 
 	end
 

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "This is intended for internal purposes only"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.test_files = Dir["sppec/**/*.rb"]
+  s.test_files = Dir["spec/**/*.rb"]
 
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "rest-client"
