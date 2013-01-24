@@ -12,6 +12,7 @@ module TsJsonApi
 				  response = perfom_request(partial_url)
 					json = response.to_str
 					json.gsub!(/[^\x20-\x7e]/,'')
+					json.gsub! 'NaN', '"NaN"'
 
 					log(path, url, json)
 
