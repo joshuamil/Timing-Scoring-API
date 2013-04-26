@@ -114,3 +114,6 @@ rescue TsJsonApi::AccessTokenRefused
 rescue TsJsonApi::Exception => e
 	puts "some exception bubbled up from RestClient: #{e}, or a catch-all for all TsJsonApi exceptions"
 ```
+
+## Testing
+The test suite is written in rpsec, so just run `rake spec` to see the status of the tests.

@@ -2,61 +2,47 @@ require 'spec_helper'
 
 describe TsJsonApi::Configure do
 
-	context "Throw exceptions when values are not set" do
+  context "Throw exceptions when values are not set" do
 
-		it "should raise exception when accessing blank username" do
-			expect { TsJsonApi::Configure.username }.to raise_error(RuntimeError, "Must provide an username")
-		end
+    it "should raise exception when accessing blank username" do
+      expect { TsJsonApi::Configure.username }.to raise_error(RuntimeError, "Must provide an username")
+    end
 
-		it "should raise exception when accessing blank password" do
-			expect { TsJsonApi::Configure.password }.to raise_error(RuntimeError, "Must provide a password")
-		end
+    it "should raise exception when accessing blank password" do
+      expect { TsJsonApi::Configure.password }.to raise_error(RuntimeError, "Must provide a password")
+    end
 
-		it "should raise exception when accessing blank server_url" do
-			expect { TsJsonApi::Configure.server_url }.to raise_error(RuntimeError, "Must provide a server URL for the API")
-		end
+    it "should raise exception when accessing blank server_url" do
+      expect { TsJsonApi::Configure.server_url }.to raise_error(RuntimeError, "Must provide a server URL for the API")
+    end
 
-	end
+  end
 
-	context "store values appropriately" do
+  context "default settings" do
+    subject { TsJsonApi::Configure }
+    its(:api_version) { should == 2}
+    it { should be_logging_enabled }
+    it { should_not be_timestamped_logs }
+  end
 
-		it "should set username & return it" do
-			TsJsonApi::Configure.username = "username"
-			TsJsonApi::Configure.username.should == "username"
-		end
+  context "store values appropriately" do
 
-		it "should set password & return it" do
-			TsJsonApi::Configure.password = "password"
-			TsJsonApi::Configure.password.should == "password"
-		end
+    subject { TsJsonApi::Configure }
 
-		it "should have default API version" do
-			TsJsonApi::Configure.api_version.should == 2
-		end
+    before do
+      TsJsonApi::Configure.username = "username"
+      TsJsonApi::Configure.password = "password"
+      TsJsonApi::Configure.api_version = 1
+      TsJsonApi::Configure.logging_enabled = false
+      TsJsonApi::Configure.timestamped_logs = true
+    end
 
-		it "should store & return API version" do
-			TsJsonApi::Configure.api_version = 1
-			TsJsonApi::Configure.api_version.should == 1
-		end
+    its(:username) { should == "username" }
+    its(:password) { should == "password" }
+    its(:api_version) { should == 1 }
+    it { should_not be_logging_enabled }
+    it { should be_timestamped_logs }
 
-		it "logging should be enabled by default" do
-			TsJsonApi::Configure.logging_enabled?.should == true
-		end
-
-		it "should store logging enabled value" do
-			TsJsonApi::Configure.logging_enabled = false
-			TsJsonApi::Configure.logging_enabled?.should == false
-		end
-
-		it "should have timestamp logging disabled by default" do
-			TsJsonApi::Configure.timestamped_logs?.should be_false
-		end
-
-		it "should store timestamped logging setting" do
-			TsJsonApi::Configure.timestamped_logs = true
-			TsJsonApi::Configure.timestamped_logs?.should be_true
-		end
-
-	end
+  end
 
 end
