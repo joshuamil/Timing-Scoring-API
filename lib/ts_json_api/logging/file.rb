@@ -2,6 +2,8 @@ module TsJsonApi
   module Logging
     class File
 
+      extend ActiveModel::Naming
+
       attr_reader :path, :options
 
       def initialize(options={})
@@ -44,10 +46,19 @@ module TsJsonApi
         json
       end
 
+      def basename
+        ::File.basename(@path)
+      end
+
+      # Support for dom_id in views
+      def to_key
+        [basename.parameterize]
+      end
+
       private
 
       def content_string(str)
-        { time: Time.now, url: options[:url], content: str }.to_json
+        { time: Time.now.to_i, url: options[:url], content: str }.to_json
       end
 
       def create_dir_if_not_exists
