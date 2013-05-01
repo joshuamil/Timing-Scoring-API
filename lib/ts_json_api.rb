@@ -5,6 +5,7 @@ require 'ts_json_api/railtie'
 module TsJsonApi
 
 	autoload :Configure,			'ts_json_api/configure'
+	autoload :Logging,				'ts_json_api/logging'
 	autoload :Requestor,			'ts_json_api/requestor'
 
 	# Expose all the methods of the Requestor class directly on the module itself

@@ -45,6 +45,11 @@ module TsJsonApi
 			  	end
 			  end
 
+				def log(path, url, str)
+					f = Logging::File.new(relative_path: path, url: url)
+					f.write str
+				end
+
 			end
 
 		end

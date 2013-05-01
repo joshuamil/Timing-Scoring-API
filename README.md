@@ -115,5 +115,25 @@ rescue TsJsonApi::Exception => e
 	puts "some exception bubbled up from RestClient: #{e}, or a catch-all for all TsJsonApi exceptions"
 ```
 
+### Logging
+
+There are settings mentioned above to enable logging so that the gem will log files automatically when a request is made. However, there is also a simple API to read and utilize the information stored in the log files.  For example, to get the contents of the response from the most recent `TsJsonApi.series` call that was made:
+
+```ruby
+f = TsJsonApi::Logging::File.new relative_path "series.log", readonly: true
+f.contents[:content]
+# => Hash/Array, actual JSON response made earlier
+f.contents[:time]
+# => Time object
+f.contents[:url]
+# => "http://server.url/api/series"
+```
+
+If you have the absolute path to the file:
+
+```ruby
+f = TsJsonApi::Logging::File.new path: my_path, readonly: true
+```
+
 ## Testing
 The test suite is written in rpsec, so just run `rake spec` to see the status of the tests.
