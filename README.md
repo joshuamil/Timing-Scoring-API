@@ -24,14 +24,24 @@ This gem provides several configuration options exposed in an `ts_json_api.rb` i
 TsJsonApi::Configure.setup do |config|
 	config.username = ""
 	config.password = ""
-	config.api_version = 2
 	config.logging_enabled = true
 	config.server_url = ""
 	config.timestamped_logs = false
+
+	config.api_version = 2
+	config.api_version = ->(url) do
+	  if url =~ /livepoints/
+	    'include_wins'
+	  else
+	    2
+	  end
+	end
 end
 ```
 
 The `username`, `password`, and `server_url` fields are all requried to specify which service to connect to.  The `api_version` field allows you to specify a particular version or contract you have in place with the T&S team when authenticating with the service.
+
+You can specify a lambda for the `api_version` setting, or any instance that responds to `#call` and accepts one argument of the URL being requested, to dynamically return the version for the request.
 
 You can disable logging by setting `logging_enabled = false`. Logging will log the raw response from the T&S service into the Rails `tmp/ts_json_api/` directory for you to review.
 
