@@ -20,12 +20,12 @@ module TsJsonApi
         end
 
         def api
-          @@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20, headers: { accept: :json })
+          @@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20)
         end
 
         def perfom_request(partial_url)
           begin
-            api[partial_url].get version: api_version(partial_url)
+            api[partial_url].get accept: "application/json;version=#{api_version(partial_url)}"
 
           rescue RestClient::Exceptions::EXCEPTIONS_MAP[400] => e
             raise ApiLimitExceededException.new exception: e
