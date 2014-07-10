@@ -79,6 +79,7 @@ TsJsonApi.driver_summary(race_season, series_id, driver_id=nil)
 TsJsonApi.live_feed
 TsJsonApi.live_flag
 TsJsonApi.live_points
+TsJsonApi.live_qualifying
 
 # Points
 TsJsonApi.points_per_race(race_season, series_id, race_id=nil)

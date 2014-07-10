@@ -17,6 +17,10 @@ module TsJsonApi
 					send_json_request_and_deliver_response "live/points/live_points", "livepoints"
 				end
 
+				def live_qualifying
+					send_json_request_and_deliver_response "live/qualifying/live_qualifying", "livequalifying"
+				end
+
 			end
 
 		end
