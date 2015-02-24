@@ -7,7 +7,10 @@ module TsJsonApi
       module ClassMethods
 
         def send_json_request_and_deliver_response(path, partial_url)
-          url = "#{Configure.server_url}#{partial_url}"
+
+          instance = arguments[2] || 1
+
+          url = "#{Configure.server_url[instance]}#{partial_url}"
 
           response = perfom_request(partial_url)
           json = response.to_str
@@ -20,7 +23,7 @@ module TsJsonApi
         end
 
         def api
-          @@api ||= RestClient::Resource.new(Configure.server_url, user: Configure.username, password: Configure.password, timeout: 20)
+          @@api ||= RestClient::Resource.new(Configure.server_url[instance], user: Configure.username, password: Configure.password, timeout: 20)
         end
 
         def perfom_request(partial_url)

@@ -12,8 +12,8 @@ describe TsJsonApi::Configure do
       expect { TsJsonApi::Configure.password }.to raise_error(RuntimeError, "Must provide a password")
     end
 
-    it "should raise exception when accessing blank server_url" do
-      expect { TsJsonApi::Configure.server_url }.to raise_error(RuntimeError, "Must provide a server URL for the API")
+    it "should raise exception when accessing blank server_url1" do
+      expect { TsJsonApi::Configure.server_url1 }.to raise_error(RuntimeError, "Must provide at least one server URL for the API")
     end
 
   end

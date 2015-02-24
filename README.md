@@ -25,7 +25,9 @@ TsJsonApi::Configure.setup do |config|
 	config.username = ""
 	config.password = ""
 	config.logging_enabled = true
-	config.server_url = ""
+	config.server_url1 = ""
+	config.server_url2 = ""
+	config.server_url3 = ""
 	config.timestamped_logs = false
 
 	config.api_version = 2
@@ -39,7 +41,7 @@ TsJsonApi::Configure.setup do |config|
 end
 ```
 
-The `username`, `password`, and `server_url` fields are all requried to specify which service to connect to.  The `api_version` field allows you to specify a particular version or contract you have in place with the T&S team when authenticating with the service.
+The `username`, `password`, and `server_url1` fields are all requried to specify which service to connect to.  The `api_version` field allows you to specify a particular version or contract you have in place with the T&S team when authenticating with the service.
 
 You can specify a lambda for the `api_version` setting, or any instance that responds to `#call` and accepts one argument of the URL being requested, to dynamically return the version for the request.
 
